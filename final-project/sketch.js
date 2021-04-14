@@ -56,13 +56,8 @@ function setup() {
   income_ma = table.getColumn("GNI per capita(men)").map(Number); //male income
 
   ageDif = table.getColumn("age_difference").map(Number); //age Difference
-  incomeDif = table.getColumn("Ratio male to female").map(Number); //age Difference
-
-
-
-  // incomeMale = table.getColumn("LT $1000Count").map(Number);
-  // incomeFemale = table.getColumn("$1000 TO 2999Count").map(Number);
-
+  incomeDif = table.getColumn("Ratio male to female").map(Number); //income Difference
+  employDif = table.getColumn("employment ratio male-female").map(Number); //employment Difference
 }
 
 function isMouseOverCircle(x, y, radius){ // from petra
@@ -129,6 +124,7 @@ function draw() {
     income_ma_barW = map(income_ma[i],0,max(income_fe[i],income_ma[i]),0,70);
     incomeDif_d = map(incomeDif[i],1,2.5,80,140);
     marriAgeDif_d = map(ageDif[i],0,5,80,140);
+    employDif_d = map(employDif[i],1,5,80,140);
 
     var x = mercX(lon[i])-cx;
     var y = mercY(lat[i])-cy;
@@ -190,16 +186,19 @@ function draw() {
 
       // display differences circle
       fill('rgba(240,240,214,0.8)'); //age
-      circle(70,135,marriAgeDif_d);
-      fill('#0000FF');
-      textSize(12);
-      text('Male ' + ageDif[i].toFixed(2) + ' years older',65,160);
+      circle(180,135,marriAgeDif_d);
 
       fill('rgba(0,177,106,0.8)'); //income
-      circle(180,170,incomeDif_d);
+      circle(290,170,incomeDif_d);
+
+      fill('rgba(242,120,75,0.8)'); //employ
+      circle(400,135,employDif_d);
+
       fill('#0000FF');
       textSize(12);
-      text('M-F ratio:' + incomeDif[i].toFixed(2),180,190);
+      text('Male ' + ageDif[i].toFixed(2) + ' years older',175,160);
+      text('M-F ratio:' + incomeDif[i].toFixed(2),290,190);
+      text('M-F ratio:' + employDif[i].toFixed(2),400,160);
 
       // fill(235,circleColor,circleColor);
       // textSize(10);
@@ -279,28 +278,28 @@ function draw() {
   textSize(12);
   fill(255, 255, 255);
   let t1 = 'age get married';
-  text(t1,45,120,50,50);
+  text(t1,155,120,50,50);
 
-  text('income',180,175);
+  text('income',290,175);
 
   let t2 = 'employment rate';
-  text(t2,265,125,50,50);
+  text(t2,375,120,50,50);
 
   stroke(255, 255, 255);
-  line(0, 220, 400, 220) //x
+  line(110, 220, 510, 220) //x
   // X axis lable
   textFont("Arial");
   fill(255, 255, 255);
   noStroke();
   textSize (15);
   textAlign(CENTER);
-  text('Gender differences in the fields of', 200,235);
+  text('Gender differences in the fields of', 310,235);
 
   stroke('rgba(255,255,255,0.5)');
   noFill();
-  circle(70,135,80);
-  circle(180,170,80);
-  circle(290,135,80);
+  circle(180,135,80);
+  circle(290,170,80);
+  circle(400,135,80);
 }
 
 }
