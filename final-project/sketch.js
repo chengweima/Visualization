@@ -2,6 +2,7 @@ var w = 1024;
 var h = 512;
 var mapimg;
 var table;
+var brokenheart;
 
 var clat = 0;
 var clon = 0;
@@ -19,6 +20,7 @@ function preload() // code from youtube channel - The Coding Train
 {
   mapimg = loadImage('https://api.mapbox.com/styles/v1/mapbox/dark-v10/static/-40,0,1,0,0/1024x512?access_token=pk.eyJ1IjoiY2hlbmd3ZWltYSIsImEiOiJja213MWdzMnEwYW0xMnZxbnBocWthdmVyIn0.04mlQToUTEG6Ww5cbSn6Dw');
   table = loadTable("data/projectdata_new.csv","csv","header");
+  brokenheart = loadImage('data/broken-heart.png');
 }
 
 function mercX(lon){
@@ -91,6 +93,7 @@ function draw() {
   translate(width/2,height/2);
   imageMode(CENTER);
   image(mapimg,0,0);
+
   var cx = mercX(clon);
   var cy = mercX(clat);
   // console.log(cx);
@@ -142,12 +145,18 @@ function draw() {
       textSize(12);
       text(countries[i],x+120,y-12); // show country name
 
-      textSize(30);
-      text(countries[i]+':',0,70);
-      text(divRate[i],0,110);
+      textAlign(LEFT);
+      textSize(18);
+      text(countries[i]+"'s divorce rate:",-195,185);
+      text(divRate[i],-195,210);
+
+      for (var j = 0; j < Math.max(1,Math.round(divRate[i])); j++){
+          image(brokenheart,-180+j*35,150,30,30);
+      }
 
       // display female basic info
       fill('#F5A9F2');
+      textAlign(CENTER);
       textSize(10);
       rect(-335,-208+60,marriAge_fe_barW,10);//age
       text(marriAge_fe[i].toFixed(2), -318 + marriAge_fe_barW,-200+60);
