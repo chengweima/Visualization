@@ -127,7 +127,7 @@ function draw() {
     income_ma_barW = map(income_ma[i],0,max(income_fe[i],income_ma[i]),0,70);
     incomeDif_d = map(incomeDif[i],1,2.5,80,140);
     marriAgeDif_d = map(ageDif[i],0,5,80,140);
-    employDif_d = map(employDif[i],1,5,80,140);
+    employDif_d = map(employDif[i],1,3,80,140);
 
     var x = mercX(lon[i])-cx;
     var y = mercY(lat[i])-cy;
@@ -252,7 +252,7 @@ function draw() {
     textSize (10);
     textAlign(CENTER);
     text('income', -370,-50);
-    text('rate %', -370,-73);
+    text('ratio %', -370,-73);
     text('employment', -370,-83);
     text('enrollment %', -370,-103);
     text('tertiary edu', -370,-113);
@@ -291,7 +291,7 @@ function draw() {
 
   text('income',290,175);
 
-  let t2 = 'employment rate';
+  let t2 = 'employment ratio';
   text(t2,375,120,50,50);
 
   stroke(255, 255, 255);
